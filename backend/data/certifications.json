@@ -1,0 +1,25 @@
+[
+  {
+    "id": "cert-001",
+    "title": "CompTIA A+",
+    "issuer": "CompTIA",
+    "status": "in_progress",
+    "issue_date": null,
+    "expiry_date": null,
+    "credential_id": null,
+    "credential_url": "https://www.comptia.org/certifications/a",
+    "image_url": null,
+    "description": "Actively studying for both Core 1 (220-1101) and Core 2 (220-1102) exams. My approach combines structured coursework with hands-on lab work—every concept I study gets reinforced through practical projects in my homelab environment.",
+    "study_topics": [
+      "Hardware Troubleshooting",
+      "Operating Systems",
+      "Networking",
+      "Security Fundamentals",
+      "Mobile Devices",
+      "Virtualization"
+    ],
+    "order": 1,
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "updated_at": "2025-01-05T00:00:00.000Z"
+  }
+]
