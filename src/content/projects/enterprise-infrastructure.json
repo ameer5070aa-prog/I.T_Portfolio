@@ -1,0 +1,19 @@
+{
+  "title": "Enterprise IT Infrastructure Simulation (Flagship Homelab)",
+  "summary": "A comprehensive homelab environment simulating a small-to-midsize organization with integrated identity, networking, and automation.",
+  "covers": [
+    "Active Directory domain with structured OUs and user lifecycle workflows",
+    "Segmented network design with firewall rules",
+    "Automation for onboarding and administrative tasks",
+    "Monitoring dashboards and operational documentation"
+  ],
+  "skills": [
+    "Systems Administration",
+    "Networking",
+    "Automation",
+    "Monitoring"
+  ],
+  "importance": "This flagship project demonstrates my ability to design and maintain complex IT infrastructure. It shows I understand how enterprise systems connect, how to automate repetitive tasks, and how to build resilient environments that support business operations.",
+  "videoUrl": "",
+  "order": 1
+}
