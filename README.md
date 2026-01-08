@@ -1,272 +1,73 @@
-# IT Portfolio Project
+# Welcome to your Lovable project
 
-A comprehensive IT portfolio showcasing your skills, projects, and professional experience with both a public-facing portfolio and an admin dashboard for content management.
+## Project info
 
-## 🎯 Project Overview
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-This project combines two powerful templates:
-- **Portfolio Frontend**: Modern React/TypeScript portfolio with Tailwind CSS
-- **Admin Dashboard**: Professional admin panel for managing portfolio content
+## How can I edit this code?
 
-## 📁 Project Structure
+There are several ways of editing your application.
 
-```
-IT-Portfolio/
-├── portfolio-frontend/          # Public-facing portfolio website
-│   ├── src/
-│   │   ├── components/         # Reusable UI components
-│   │   ├── pages/              # Main pages (Index, Admin, NotFound)
-│   │   ├── hooks/              # Custom React hooks
-│   │   └── lib/                # Utilities and Supabase config
-│   ├── public/                 # Static assets
-│   └── package.json
-│
-├── admin-dashboard/            # Admin panel for content management
-│   ├── src/
-│   │   ├── components/         # Dashboard components
-│   │   ├── views/              # Dashboard views
-│   │   ├── layouts/            # Layout components
-│   │   └── routes/             # Route configuration
-│   └── package.json
-│
-├── docs/                       # Project documentation
-├── shared/                     # Shared resources (optional)
-└── README.md                   # This file
-```
+**Use Lovable**
 
-## 🚀 Getting Started
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
-### Prerequisites
+Changes made via Lovable will be committed automatically to this repo.
 
-- **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
-- **npm** or **yarn** - Comes with Node.js
-- **Git** - For version control
+**Use your preferred IDE**
 
-### Installation
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-#### 1. Portfolio Frontend Setup
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-```bash
-# Navigate to portfolio frontend
-cd Projects/IT-Portfolio/portfolio-frontend
+Follow these steps:
 
-# Install dependencies
-npm install
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-# Start development server
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-The portfolio will be available at `http://localhost:5173`
+**Edit a file directly in GitHub**
 
-#### 2. Admin Dashboard Setup
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-```bash
-# Navigate to admin dashboard
-cd Projects/IT-Portfolio/admin-dashboard
+**Use GitHub Codespaces**
 
-# Install dependencies
-npm install
-# or
-yarn install
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-# Start development server
-npm start
-# or
-yarn start
-```
+## What technologies are used for this project?
 
-The admin dashboard will be available at `http://localhost:5174`
+This project is built with:
 
-## 🛠️ Technology Stack
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-### Portfolio Frontend
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui (Radix UI primitives)
-- **Routing**: React Router DOM
-- **State Management**: React Query (@tanstack/react-query)
-- **Backend**: Supabase (optional)
-- **Icons**: Lucide React
+## How can I deploy this project?
 
-### Admin Dashboard
-- **Framework**: React 18
-- **Build Tool**: Vite
-- **Styling**: Bootstrap 5 + SCSS
-- **UI Library**: React Bootstrap
-- **Charts**: ApexCharts
-- **Routing**: React Router DOM
-- **Icons**: Feather Icons
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-## 📦 Key Features
+## Can I connect a custom domain to my Lovable project?
 
-### Portfolio Frontend
-- ✨ Modern, responsive design
-- 🎨 Beautiful particle background effects
-- 📱 Mobile-first approach
-- 🎯 Sections: Hero, About, Skills, Projects, Labs, Certifications, Contact
-- 🌓 Theme support with next-themes
-- 📊 Project showcase with filtering
-- 🎓 Certifications display
-- 📧 Contact form integration
+Yes, you can!
 
-### Admin Dashboard
-- 📊 Analytics dashboard
-- 📈 Data visualization with charts
-- 🎨 Professional UI components
-- 📱 Fully responsive
-- 🔐 Authentication pages (login/register)
-- 📋 Sample pages for customization
-- 🎛️ Customizable layouts
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-## 🎨 Customization Guide
-
-### Portfolio Content
-
-1. **Update Personal Information**
-   - Edit `portfolio-frontend/src/components/HeroSection.tsx`
-   - Edit `portfolio-frontend/src/components/AboutSection.tsx`
-
-2. **Add Projects**
-   - Update `portfolio-frontend/public/projects.json`
-   - Or integrate with Supabase for dynamic content
-
-3. **Customize Skills**
-   - Edit `portfolio-frontend/src/components/SkillsSection.tsx`
-
-4. **Add Certifications**
-   - Edit `portfolio-frontend/src/components/CertificationsSection.tsx`
-
-5. **Styling**
-   - Modify `portfolio-frontend/tailwind.config.ts`
-   - Edit component styles in respective files
-
-### Dashboard Customization
-
-1. **Navigation Menu**
-   - Edit `admin-dashboard/src/menu-items.js`
-
-2. **Dashboard Content**
-   - Modify views in `admin-dashboard/src/views/dashboard/`
-
-3. **Theme Colors**
-   - Edit SCSS variables in `admin-dashboard/src/assets/scss/settings/`
-
-## 🔗 Integration Ideas
-
-### Connect Frontend & Backend
-1. **Use Supabase** for backend services
-   - User authentication
-   - Project management
-   - Blog posts
-   - Contact form submissions
-
-2. **Create API endpoints** for:
-   - Fetching portfolio items
-   - Managing projects
-   - Handling contact submissions
-   - Analytics tracking
-
-3. **Admin Dashboard Integration**
-   - Build admin pages to manage portfolio content
-   - Connect to same Supabase instance
-   - Create CRUD operations for projects, blogs, etc.
-
-## 📝 Development Workflow
-
-### Recommended Setup
-1. Run both apps simultaneously during development
-2. Use separate terminals for each app
-3. Test responsive design on multiple devices
-4. Use browser dev tools for debugging
-
-### Build for Production
-
-#### Portfolio Frontend
-```bash
-cd portfolio-frontend
-npm run build
-```
-Output: `portfolio-frontend/dist/`
-
-#### Admin Dashboard
-```bash
-cd admin-dashboard
-npm run build
-```
-Output: `admin-dashboard/dist/`
-
-## 🌐 Deployment Options
-
-### Portfolio Frontend
-- **Vercel** (Recommended for React/Vite)
-- **Netlify**
-- **GitHub Pages**
-- **AWS S3 + CloudFront**
-
-### Admin Dashboard
-- **Vercel**
-- **Netlify**
-- **Heroku**
-- **DigitalOcean App Platform**
-
-### Deployment Tips
-- Use environment variables for sensitive data
-- Configure CORS for API calls
-- Set up proper domain/subdomain structure:
-  - `yourname.com` → Portfolio
-  - `admin.yourname.com` → Dashboard
-
-## 🎓 Learning Resources
-
-### React & TypeScript
-- [React Official Docs](https://react.dev/)
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
-
-### Styling
-- [Tailwind CSS Docs](https://tailwindcss.com/docs)
-- [shadcn/ui Components](https://ui.shadcn.com/)
-- [Bootstrap Docs](https://getbootstrap.com/)
-
-### Backend
-- [Supabase Docs](https://supabase.com/docs)
-
-## 🤝 Next Steps
-
-1. **Customize Your Portfolio**
-   - Add your personal information
-   - Update projects and certifications
-   - Add your resume/CV
-
-2. **Build Admin Features**
-   - Create project management page
-   - Add blog/article management
-   - Implement contact form handler
-
-3. **Add Advanced Features**
-   - User authentication
-   - Real-time updates
-   - Analytics integration
-   - SEO optimization
-
-4. **Deploy**
-   - Choose hosting platform
-   - Set up CI/CD pipeline
-   - Configure custom domain
-
-## 📄 License
-
-- Portfolio Template: Check `portfolio-frontend/` for license details
-- Dashboard Template: MIT License (see `admin-dashboard/`)
-
-## 🆘 Need Help?
-
-- Portfolio Template: [Lovable Documentation](https://lovable.dev)
-- Dashboard Template: [DashboardKit Docs](https://codedthemes.gitbook.io/dashboardkit-react)
-
----
-
-**Happy Building! 🚀**
-
-Start by customizing the portfolio with your information, then build out admin features to manage your content dynamically.
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
