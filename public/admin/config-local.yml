@@ -1,0 +1,18 @@
+backend:
+  name: test-repo
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - file: "src/content/hero.json"
+        label: "Hero Content"
+        name: "hero"
+        fields:
+          - { label: "Status Badge", name: "statusBadge", widget: "string" }
+          - { label: "Headline", name: "headline", widget: "text" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Skills", name: "skills", widget: "list" }

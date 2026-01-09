@@ -1,0 +1,70 @@
+backend:
+  name: git-gateway
+  branch: master # Branch to update (main or master)
+
+# Uncomment for local development only
+# local_backend: true
+
+media_folder: "public/images" # Media files will be stored here
+public_folder: "/images" # Public path for media
+
+collections:
+  # Hero Section
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - file: "src/content/hero.json"
+        label: "Hero Content"
+        name: "hero"
+        fields:
+          - { label: "Status Badge", name: "statusBadge", widget: "string", required: true }
+          - { label: "Headline", name: "headline", widget: "text", required: true }
+          - { label: "Description", name: "description", widget: "text", required: true }
+          - { label: "Skills", name: "skills", widget: "list", required: true }
+
+  # About Section
+  - name: "about"
+    label: "About Section"
+    files:
+      - file: "src/content/about.json"
+        label: "About Content"
+        name: "about"
+        fields:
+          - { label: "Section Title", name: "title", widget: "string", required: true }
+          - { label: "Bio", name: "bio", widget: "markdown", required: true }
+          - label: "Stats"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
+
+  # Projects
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Summary", name: "summary", widget: "text", required: true }
+      - { label: "What This Project Covers", name: "covers", widget: "list", required: true }
+      - { label: "Skills Demonstrated", name: "skills", widget: "list", required: true }
+      - { label: "Why It Matters", name: "importance", widget: "text" }
+      - { label: "YouTube Video URL", name: "videoUrl", widget: "string", required: false }
+      - { label: "Display Order", name: "order", widget: "number", required: false }
+
+  # Contact Info
+  - name: "contact"
+    label: "Contact Info"
+    files:
+      - file: "src/content/contact.json"
+        label: "Contact Information"
+        name: "contact"
+        fields:
+          - { label: "Email", name: "email", widget: "string", required: true }
+          - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false }
+          - { label: "GitHub URL", name: "github", widget: "string", required: false }
+          - { label: "Twitter/X URL", name: "twitter", widget: "string", required: false }
