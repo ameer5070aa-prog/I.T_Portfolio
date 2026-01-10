@@ -1,20 +1,9 @@
-import { TinaEditProvider } from "tinacms/dist/edit-state";
-
 interface TinaProviderProps {
   children: React.ReactNode;
 }
 
 export const TinaProvider = ({ children }: TinaProviderProps) => {
-  return (
-    <TinaEditProvider
-      showEditButton={true}
-      editMode={
-        <div>
-          <div id="tina-admin-container" style={{ minHeight: "100vh" }} />
-        </div>
-      }
-    >
-      {children}
-    </TinaEditProvider>
-  );
+  // Simple passthrough provider for now
+  // TinaCMS admin panel works without this wrapper
+  return <>{children}</>;
 };

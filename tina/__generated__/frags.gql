@@ -1,0 +1,37 @@
+fragment HeroParts on Hero {
+  __typename
+  statusBadge
+  headline
+  description
+  skills
+}
+
+fragment AboutParts on About {
+  __typename
+  title
+  bio
+  stats {
+    __typename
+    label
+    value
+  }
+}
+
+fragment ProjectsParts on Projects {
+  __typename
+  title
+  summary
+  covers
+  skills
+  importance
+  videoUrl
+  order
+}
+
+fragment ContactParts on Contact {
+  __typename
+  email
+  linkedin
+  github
+  twitter
+}

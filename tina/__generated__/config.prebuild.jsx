@@ -1,25 +1,20 @@
+// tina/config.ts
 import { defineConfig } from "tinacms";
-
-// Your hosting provider likely exposes this as an environment variable
-const branch = process.env.NEXT_PUBLIC_TINA_BRANCH || "master";
-
-export default defineConfig({
+var branch = process.env.NEXT_PUBLIC_TINA_BRANCH || "master";
+var config_default = defineConfig({
   branch,
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
   token: process.env.TINA_TOKEN || "",
-  
   build: {
     outputFolder: "admin",
-    publicFolder: "public",
+    publicFolder: "public"
   },
-  
   media: {
     tina: {
       mediaRoot: "images",
-      publicFolder: "public",
-    },
+      publicFolder: "public"
+    }
   },
-  
   schema: {
     collections: [
       {
@@ -28,20 +23,20 @@ export default defineConfig({
         path: "src/content",
         format: "json",
         match: {
-          include: "hero",
+          include: "hero"
         },
         ui: {
           allowedActions: {
             create: false,
-            delete: false,
-          },
+            delete: false
+          }
         },
         fields: [
           {
             type: "string",
             name: "statusBadge",
             label: "Status Badge",
-            required: true,
+            required: true
           },
           {
             type: "string",
@@ -49,8 +44,8 @@ export default defineConfig({
             label: "Headline",
             required: true,
             ui: {
-              component: "textarea",
-            },
+              component: "textarea"
+            }
           },
           {
             type: "string",
@@ -58,17 +53,17 @@ export default defineConfig({
             label: "Description",
             required: true,
             ui: {
-              component: "textarea",
-            },
+              component: "textarea"
+            }
           },
           {
             type: "string",
             name: "skills",
             label: "Skills",
             required: true,
-            list: true,
-          },
-        ],
+            list: true
+          }
+        ]
       },
       {
         name: "about",
@@ -76,26 +71,26 @@ export default defineConfig({
         path: "src/content",
         format: "json",
         match: {
-          include: "about",
+          include: "about"
         },
         ui: {
           allowedActions: {
             create: false,
-            delete: false,
-          },
+            delete: false
+          }
         },
         fields: [
           {
             type: "string",
             name: "title",
             label: "Section Title",
-            required: true,
+            required: true
           },
           {
             type: "rich-text",
             name: "bio",
             label: "Bio",
-            required: true,
+            required: true
           },
           {
             type: "object",
@@ -106,16 +101,16 @@ export default defineConfig({
               {
                 type: "string",
                 name: "label",
-                label: "Label",
+                label: "Label"
               },
               {
                 type: "string",
                 name: "value",
-                label: "Value",
-              },
-            ],
-          },
-        ],
+                label: "Value"
+              }
+            ]
+          }
+        ]
       },
       {
         name: "projects",
@@ -127,7 +122,7 @@ export default defineConfig({
             type: "string",
             name: "title",
             label: "Title",
-            required: true,
+            required: true
           },
           {
             type: "string",
@@ -135,42 +130,42 @@ export default defineConfig({
             label: "Summary",
             required: true,
             ui: {
-              component: "textarea",
-            },
+              component: "textarea"
+            }
           },
           {
             type: "string",
             name: "covers",
             label: "What This Project Covers",
             list: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "skills",
             label: "Skills Demonstrated",
             list: true,
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "importance",
             label: "Why It Matters",
             ui: {
-              component: "textarea",
-            },
+              component: "textarea"
+            }
           },
           {
             type: "string",
             name: "videoUrl",
-            label: "YouTube Video URL",
+            label: "YouTube Video URL"
           },
           {
             type: "number",
             name: "order",
-            label: "Display Order",
-          },
-        ],
+            label: "Display Order"
+          }
+        ]
       },
       {
         name: "contact",
@@ -178,38 +173,41 @@ export default defineConfig({
         path: "src/content",
         format: "json",
         match: {
-          include: "contact",
+          include: "contact"
         },
         ui: {
           allowedActions: {
             create: false,
-            delete: false,
-          },
+            delete: false
+          }
         },
         fields: [
           {
             type: "string",
             name: "email",
             label: "Email",
-            required: true,
+            required: true
           },
           {
             type: "string",
             name: "linkedin",
-            label: "LinkedIn URL",
+            label: "LinkedIn URL"
           },
           {
             type: "string",
             name: "github",
-            label: "GitHub URL",
+            label: "GitHub URL"
           },
           {
             type: "string",
             name: "twitter",
-            label: "Twitter/X URL",
-          },
-        ],
-      },
-    ],
-  },
+            label: "Twitter/X URL"
+          }
+        ]
+      }
+    ]
+  }
 });
+export {
+  config_default as default
+};
