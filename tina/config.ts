@@ -35,6 +35,10 @@ export default defineConfig({
             create: false,
             delete: false,
           },
+          router: ({ document }) => {
+            // Navigate to homepage for hero editing
+            return '/';
+          },
         },
         fields: [
           {
@@ -83,6 +87,10 @@ export default defineConfig({
             create: false,
             delete: false,
           },
+          router: ({ document }) => {
+            // Navigate to homepage for about section editing
+            return '/';
+          },
         },
         fields: [
           {
@@ -122,6 +130,12 @@ export default defineConfig({
         label: "Projects",
         path: "src/content/projects",
         format: "json",
+        ui: {
+          router: ({ document }) => {
+            // Navigate to homepage for projects editing
+            return '/';
+          },
+        },
         fields: [
           {
             type: "string",
@@ -184,6 +198,10 @@ export default defineConfig({
           allowedActions: {
             create: false,
             delete: false,
+          },
+          router: ({ document }) => {
+            // Navigate to homepage for contact editing
+            return '/';
           },
         },
         fields: [

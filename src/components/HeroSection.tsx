@@ -1,52 +1,23 @@
 import { ArrowDown, ChevronRight } from 'lucide-react';
 import ParticleBackground from './ParticleBackground';
-import { useState, useEffect } from 'react';
 import { useTina, tinaField } from 'tinacms/dist/react';
-import client from '../../tina/__generated__/client';
+import heroData from '../content/hero.json';
 
 const HeroSection = () => {
-  const [heroQuery, setHeroQuery] = useState<any>(null);
-  const [isLoading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const heroResponse = await client.queries.hero({
-          relativePath: 'hero.json',
-        });
-        setHeroQuery(heroResponse);
-      } catch (error) {
-        console.error('Error fetching hero data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchContent();
-  }, []);
-
+  // useTina hook for visual editing - data passes through in production, 
+  // and is updated to sidebar data in edit-mode
   const { data } = useTina({
-    query: heroQuery?.query || '',
-    variables: heroQuery?.variables || {},
-    data: heroQuery?.data || {
-      hero: {
-        statusBadge: "Actively Building IT Systems & Operations",
-        headline: "Hey, I'm Ameer, an IT professional focused on support and systems.",
-        description: "I build and document deep, hands-on IT projects across support, networking, automation, and infrastructure—exploring everything from Tier-1 help desk operations to Docker-based labs, system administration, and AI-driven tooling.",
-        skills: ['Windows', 'Active Directory', 'Ticketing Systems', 'Remote Support', 'Networking']
+    query: `query Hero($relativePath: String!) {
+      hero(relativePath: $relativePath) {
+        statusBadge
+        headline
+        description
+        skills
       }
-    },
+    }`,
+    variables: { relativePath: 'hero.json' },
+    data: { hero: heroData },
   });
-
-  if (isLoading) {
-    return (
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <ParticleBackground />
-        <div className="relative z-10 text-center">
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </section>
-    );
-  }
 
   const hero = data?.hero;
 
