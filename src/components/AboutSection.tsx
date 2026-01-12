@@ -35,8 +35,10 @@ const AboutSection = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main content */}
-          <div className="lg:col-span-2 space-y-6" data-tina-field={tinaField(about, 'bio')}>
-            <div dangerouslySetInnerHTML={{ __html: about.bio.replace(/\n/g, '</p><p className="text-muted-foreground leading-relaxed">') }} />
+          <div className="lg:col-span-2 space-y-6">
+            <p className="text-muted-foreground leading-relaxed" data-tina-field={tinaField(about, 'bio')}>
+              {about.bio}
+            </p>
           </div>
 
           {/* Quick facts */}
