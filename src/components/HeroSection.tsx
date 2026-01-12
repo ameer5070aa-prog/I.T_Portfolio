@@ -28,7 +28,12 @@ const HeroSection = () => {
           <div className="space-y-8">
             {/* Main headline */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight" data-tina-field={hero.headline}>
-              {hero.headline}
+              Hey, I'm{' '}
+              <span className="gradient-text">Ameer</span>, an{' '}
+              <span className="gradient-text">IT professional</span>{' '}
+              focused on{' '}
+              <span className="gradient-underline">support</span> and{' '}
+              <span className="gradient-underline">systems</span>.
             </h1>
 
             {/* Description */}
