@@ -1,86 +1,65 @@
 import { User, BookOpen, Wrench } from 'lucide-react';
 import TerminalText from './TerminalText';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import aboutData from '../content/about.json';
 
 const AboutSection = () => {
+  // useTina hook for visual editing
+  const { data } = useTina({
+    query: `query About($relativePath: String!) {
+      about(relativePath: $relativePath) {
+        title
+        bio
+        stats {
+          label
+          value
+        }
+      }
+    }`,
+    variables: { relativePath: 'about.json' },
+    data: { about: aboutData },
+  });
+
+  const about = data?.about;
+
   return (
     <section id="about" className="py-24 relative">
       <div className="section-container">
         {/* Section header */}
         <div className="mb-12">
           <TerminalText command="whoami" output="Entry-Level IT Specialist" />
-          <h2 className="text-3xl sm:text-4xl font-semibold mt-2">
-            Building a Foundation in IT Support
+          <h2 className="text-3xl sm:text-4xl font-semibold mt-2" data-tina-field={tinaField(about, 'title')}>
+            {about.title}
           </h2>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Main content */}
-          <div className="lg:col-span-2 space-y-6">
-            <p className="text-muted-foreground leading-relaxed">
-              I build and document hands-on IT systems with a focus on operations, automation, and 
-              real-world support workflows. My work spans help desk processes, system 
-              troubleshooting, networking labs, containerized environments, and automation projects 
-              designed to reduce friction and improve reliability.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-               I approach IT by building first and learning through implementation—setting up systems, 
-               testing assumptions, breaking things, and refining them until they behave the way real 
-               environments demand. That mindset has pushed me beyond theory and into practical 
-               labs that reflect how IT actually functions day to day.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-             Alongside this work, I'm an Advanced Information Technology major studying through Northern Virginia 
-             Community College and George Mason University. This portfolio is a living record of how I translate formal 
-             education and certifications into working systems.
-            </p>
+          <div className="lg:col-span-2 space-y-6" data-tina-field={tinaField(about, 'bio')}>
+            <div dangerouslySetInnerHTML={{ __html: about.bio.replace(/\n/g, '</p><p className="text-muted-foreground leading-relaxed">') }} />
           </div>
 
           {/* Quick facts */}
-          <div className="space-y-4">
-            <div className="glass-card rounded-lg p-5">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-md bg-primary/10">
-                  <User className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm mb-1">Focus Areas</h3>
-                  <p className="text-xs text-muted-foreground">
-                     IT Operations, Systems & Operations,
-                     and Support Automation Workflows
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card rounded-lg p-5">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-md bg-secondary/10">
-                  <BookOpen className="w-5 h-5 text-secondary" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm mb-1">Currently Building & Studying</h3>
-                  <p className="text-xs text-muted-foreground">
-                    CompTIA A+ (In Progress)   
-                   </p>
-                  <p className="text-xs text-muted-foreground">
-                      Hands-On Systems & Networking Labs</p>
+          <div className="space-y-4" data-tina-field={tinaField(about, 'stats')}>
+            {about.stats?.map((stat: any, index: number) => (
+              <div key={index} className="glass-card rounded-lg p-5" data-tina-field={tinaField(about.stats, index.toString())}>
+                <div className="flex items-start gap-4">
+                  <div className="p-2 rounded-md bg-primary/10">
+                    {index === 0 && <User className="w-5 h-5 text-primary" />}
+                    {index === 1 && <BookOpen className="w-5 h-5 text-secondary" />}
+                    {index === 2 && <Wrench className="w-5 h-5 text-terminal-foreground" />}
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-sm mb-1" data-tina-field={tinaField(stat, 'label')}>
+                      {stat.label}
+                    </h3>
+                    <p className="text-xs text-muted-foreground" data-tina-field={tinaField(stat, 'value')}>
+                      {stat.value}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div className="glass-card rounded-lg p-5">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-md bg-terminal/10">
-                  <Wrench className="w-5 h-5 text-terminal-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-sm mb-1">Approach</h3>
-                  <p className="text-xs text-muted-foreground">
-                    Project-Based Learning: Build, break, fix, then document.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,7 +1,25 @@
 import { Mail, Linkedin, Github, ArrowUpRight } from 'lucide-react';
 import TerminalText from './TerminalText';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import contactData from '../content/contact.json';
 
 const ContactSection = () => {
+  // useTina hook for visual editing
+  const { data } = useTina({
+    query: `query Contact($relativePath: String!) {
+      contact(relativePath: $relativePath) {
+        email
+        linkedin
+        github
+        twitter
+      }
+    }`,
+    variables: { relativePath: 'contact.json' },
+    data: { contact: contactData },
+  });
+
+  const contact = data?.contact;
+
   return (
     <section id="contact" className="py-24 relative">
       {/* Background accent */}
@@ -25,8 +43,9 @@ const ContactSection = () => {
           <div className="grid gap-4">
             {/* Email */}
             <a 
-              href="mailto:ameeromer202@gmail.com"
+              href={`mailto:${contact.email}`}
               className="glass-card rounded-xl p-5 flex items-center justify-between group hover:border-primary/30 transition-all"
+              data-tina-field={tinaField(contact, 'email')}
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -37,7 +56,7 @@ const ContactSection = () => {
                     Email
                   </h3>
                   <p className="text-xs text-muted-foreground">
-                    ameeromer202@gmail.com
+                    {contact.email}
                   </p>
                 </div>
               </div>
@@ -46,10 +65,11 @@ const ContactSection = () => {
 
             {/* LinkedIn */}
             <a 
-              href="https://www.linkedin.com/in/ameer-omer-992143386"
+              href={contact.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="glass-card rounded-xl p-5 flex items-center justify-between group hover:border-primary/30 transition-all"
+              data-tina-field={tinaField(contact, 'linkedin')}
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
@@ -69,10 +89,11 @@ const ContactSection = () => {
 
             {/* GitHub */}
             <a 
-              href="https://github.com/yourusername"
+              href={contact.github}
               target="_blank"
               rel="noopener noreferrer"
               className="glass-card rounded-xl p-5 flex items-center justify-between group hover:border-primary/30 transition-all"
+              data-tina-field={tinaField(contact, 'github')}
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-lg bg-muted group-hover:bg-muted/80 transition-colors">

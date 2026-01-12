@@ -29,6 +29,9 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
+          },
+          router: ({ document }) => {
+            return "/";
           }
         },
         fields: [
@@ -77,6 +80,9 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
+          },
+          router: ({ document }) => {
+            return "/";
           }
         },
         fields: [
@@ -117,6 +123,11 @@ var config_default = defineConfig({
         label: "Projects",
         path: "src/content/projects",
         format: "json",
+        ui: {
+          router: ({ document }) => {
+            return "/";
+          }
+        },
         fields: [
           {
             type: "string",
@@ -179,6 +190,9 @@ var config_default = defineConfig({
           allowedActions: {
             create: false,
             delete: false
+          },
+          router: ({ document }) => {
+            return "/";
           }
         },
         fields: [

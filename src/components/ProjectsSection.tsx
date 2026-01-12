@@ -1,77 +1,49 @@
 import ProjectCard from './ProjectCard';
 import TerminalText from './TerminalText';
-
-const projects = [
-  {
-    title: 'Enterprise IT Infrastructure Simulation (Flagship Homelab)',
-    summary: 'A comprehensive homelab environment simulating a small-to-midsize organization with integrated identity, networking, and automation.',
-    covers: [
-      'Active Directory domain with structured OUs and user lifecycle workflows',
-      'Segmented network design with firewall rules',
-      'Automation for onboarding and administrative tasks',
-      'Monitoring dashboards and operational documentation',
-    ],
-    skills: ['Systems Administration', 'Networking', 'Automation', 'Monitoring'],
-    
-  },
-  {
-    title: 'Help Desk Ticketing System Simulation',
-    summary: 'A modeled support ticketing system focused on how issues are reported, prioritized, escalated, and resolved.',
-    covers: [
-      'Ticket creation, categorization, and prioritization',
-      'Escalation tiers and routing logic',
-      'SLA tracking and resolution timing',
-      'Knowledge base articles from resolved tickets',
-    ],
-    skills: ['Ticketing Systems', 'ITIL Fundamentals', 'SLA Management'],
-  },
-  {
-    title: 'Active Directory User Management Lab',
-    summary: 'Hands-on AD administration covering daily identity and access tasks in enterprise environments.',
-    covers: [
-      'User and group creation and management',
-      'Password resets and account unlocks',
-      'OU structure and Group Policy basics',
-      'Bulk operations using PowerShell',
-    ],
-    skills: ['Active Directory', 'Group Policy', 'PowerShell'],
-  },
-  {
-    title: 'Windows Workstation Troubleshooting Lab',
-    summary: 'Structured diagnosis of common Windows 10/11 issues with emphasis on methodical problem-solving.',
-    covers: [
-      'Blue screen analysis and crash dump review',
-      'Performance tuning and startup optimization',
-      'Driver conflicts and hardware diagnostics',
-      'Event Viewer and registry troubleshooting',
-    ],
-    skills: ['Windows 10/11', 'Event Viewer', 'System Tools'],
-  },
-  {
-    title: 'ClarityPC.AI – Systems Metrics Dashboard',
-    summary: 'An internal dashboard for visualizing system metrics and operational data to support decision-making.',
-    covers: [
-      'System metrics collection and visualization',
-      'Backend to frontend data flow',
-      'Dashboard design focused on signal over noise',
-      'Monitoring tied to operational awareness',
-    ],
-    skills: ['System Monitoring', 'Dashboards', 'Data Flow'],
-  },
-  {
-    title: 'Majlis AI – Multi-Agent System',
-    summary: 'Multi-agent AI system with coordinated workflows, focusing on orchestration and reliability.',
-    covers: [
-      'Multi-agent role design and coordination',
-      'Session handling and state persistence',
-      'API integrations and message flow debugging',
-      'Logging, verification, and reliability tuning',
-    ],
-    skills: ['Systems Design', 'Automation', 'API Integration', 'Debugging'],
-  },
-];
+import { useTina, tinaField } from 'tinacms/dist/react';
+import { useState, useEffect } from 'react';
+import client from '../../tina/__generated__/client';
 
 const ProjectsSection = () => {
+  const [projectsData, setProjectsData] = useState<any[]>([]);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        // Fetch the list of all projects
+        const projectsResponse = await client.queries.projectsConnection();
+        const projects = projectsResponse.data.projectsConnection.edges || [];
+        
+        // Fetch each project individually with useTina support
+        const projectPromises = projects.map(async (edge: any) => {
+          const project = await client.queries.projects({
+            relativePath: edge.node._sys.filename,
+          });
+          return project;
+        });
+        
+        const allProjects = await Promise.all(projectPromises);
+        setProjectsData(allProjects);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section id="projects" className="py-24 relative">
+        <div className="section-container">
+          <p className="text-center text-muted-foreground">Loading projects...</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="projects" className="py-24 relative">
       {/* Background accent */}
@@ -80,7 +52,7 @@ const ProjectsSection = () => {
       <div className="section-container relative z-10">
         {/* Section header */}
         <div className="mb-12">
-          <TerminalText command="ls -la ~/projects" output="6 directories, 0 files" />
+          <TerminalText command="ls -la ~/projects" output={`${projectsData.length} directories, 0 files`} />
           <h2 className="text-3xl sm:text-4xl font-semibold mt-2 mb-4">
             Featured Projects
           </h2>
@@ -92,9 +64,26 @@ const ProjectsSection = () => {
 
         {/* Project grid - 3 columns on large screens */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
-          ))}
+          {projectsData.map((projectQuery, index) => {
+            const { data } = useTina({
+              query: projectQuery.query,
+              variables: projectQuery.variables,
+              data: projectQuery.data,
+            });
+            
+            const project = data.projects;
+            
+            return (
+              <div key={index} data-tina-field={tinaField(project, 'title')}>
+                <ProjectCard 
+                  title={project.title}
+                  summary={project.summary}
+                  covers={project.covers}
+                  skills={project.skills}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
