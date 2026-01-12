@@ -1,9 +1,54 @@
 import { ArrowDown, ChevronRight } from 'lucide-react';
 import ParticleBackground from './ParticleBackground';
-import heroData from '../content/hero.json';
+import { useState, useEffect } from 'react';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import client from '../../tina/__generated__/client';
 
 const HeroSection = () => {
-  const hero = heroData;
+  const [heroQuery, setHeroQuery] = useState<any>(null);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        const heroResponse = await client.queries.hero({
+          relativePath: 'hero.json',
+        });
+        setHeroQuery(heroResponse);
+      } catch (error) {
+        console.error('Error fetching hero data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchContent();
+  }, []);
+
+  const { data } = useTina({
+    query: heroQuery?.query || '',
+    variables: heroQuery?.variables || {},
+    data: heroQuery?.data || {
+      hero: {
+        statusBadge: "Actively Building IT Systems & Operations",
+        headline: "Hey, I'm Ameer, an IT professional focused on support and systems.",
+        description: "I build and document deep, hands-on IT projects across support, networking, automation, and infrastructure—exploring everything from Tier-1 help desk operations to Docker-based labs, system administration, and AI-driven tooling.",
+        skills: ['Windows', 'Active Directory', 'Ticketing Systems', 'Remote Support', 'Networking']
+      }
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <ParticleBackground />
+        <div className="relative z-10 text-center">
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </section>
+    );
+  }
+
+  const hero = data?.hero;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -16,7 +61,7 @@ const HeroSection = () => {
         <div className="flex justify-center mb-12 lg:mb-16">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-card border border-primary/30">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-mono text-primary" data-tina-field={hero.statusBadge}>
+            <span className="text-sm font-mono text-primary" data-tina-field={tinaField(hero, 'statusBadge')}>
               {hero.statusBadge}
             </span>
           </div>
@@ -27,7 +72,7 @@ const HeroSection = () => {
           {/* Left side - Text content */}
           <div className="space-y-8">
             {/* Main headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight" data-tina-field={hero.headline}>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight" data-tina-field={tinaField(hero, 'headline')}>
               Hey, I'm{' '}
               <span className="gradient-text">Ameer</span>, an{' '}
               <span className="gradient-text">IT professional</span>{' '}
@@ -37,7 +82,7 @@ const HeroSection = () => {
             </h1>
 
             {/* Description */}
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl" data-tina-field={hero.description}>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl" data-tina-field={tinaField(hero, 'description')}>
               {hero.description}
             </p>
 
@@ -59,10 +104,11 @@ const HeroSection = () => {
             </div>
 
             {/* Skills tags with smooth animations */}
-            <div className="flex flex-wrap gap-3 pt-4">
-              {hero.skills?.map((skill: string) => (
+            <div className="flex flex-wrap gap-3 pt-4" data-tina-field={tinaField(hero, 'skills')}>
+              {hero.skills?.map((skill: string, index: number) => (
                 <span
                   key={skill}
+                  data-tina-field={tinaField(hero.skills, index.toString())}
                   className="px-3 py-1.5 text-sm font-mono text-muted-foreground bg-muted/30 rounded-md border border-border/50 hover:border-primary/50 hover:text-primary hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                 >
                   {skill}
