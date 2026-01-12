@@ -35,3 +35,30 @@ fragment ContactParts on Contact {
   github
   twitter
 }
+
+fragment LabsParts on Labs {
+  __typename
+  categories {
+    __typename
+    title
+    labs {
+      __typename
+      title
+      description
+      skills
+    }
+  }
+}
+
+fragment CertificationsParts on Certifications {
+  __typename
+  certifications {
+    __typename
+    name
+    status
+    description
+    details
+    url
+    studyFocus
+  }
+}

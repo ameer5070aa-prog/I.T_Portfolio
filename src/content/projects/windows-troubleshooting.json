@@ -1,0 +1,18 @@
+{
+  "title": "Windows Workstation Troubleshooting Lab",
+  "summary": "Structured diagnosis of common Windows 10/11 issues with emphasis on methodical problem-solving.",
+  "covers": [
+    "Blue screen analysis and crash dump review",
+    "Performance tuning and startup optimization",
+    "Driver conflicts and hardware diagnostics",
+    "Event Viewer and registry troubleshooting"
+  ],
+  "skills": [
+    "Windows 10/11",
+    "Event Viewer",
+    "System Tools"
+  ],
+  "importance": "This lab demonstrates my systematic approach to diagnosing and resolving Windows workstation issues that users encounter daily.",
+  "videoUrl": "",
+  "order": 4
+}

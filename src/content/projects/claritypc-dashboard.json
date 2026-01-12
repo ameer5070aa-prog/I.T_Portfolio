@@ -1,0 +1,18 @@
+{
+  "title": "ClarityPC.AI – Systems Metrics Dashboard",
+  "summary": "An internal dashboard for visualizing system metrics and operational data to support decision-making.",
+  "covers": [
+    "System metrics collection and visualization",
+    "Backend to frontend data flow",
+    "Dashboard design focused on signal over noise",
+    "Monitoring tied to operational awareness"
+  ],
+  "skills": [
+    "System Monitoring",
+    "Dashboards",
+    "Data Flow"
+  ],
+  "importance": "This project shows my ability to build tools that provide visibility into system health and performance metrics.",
+  "videoUrl": "",
+  "order": 5
+}

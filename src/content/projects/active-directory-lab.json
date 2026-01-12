@@ -1,0 +1,18 @@
+{
+  "title": "Active Directory User Management Lab",
+  "summary": "Hands-on AD administration covering daily identity and access tasks in enterprise environments.",
+  "covers": [
+    "User and group creation and management",
+    "Password resets and account unlocks",
+    "OU structure and Group Policy basics",
+    "Bulk operations using PowerShell"
+  ],
+  "skills": [
+    "Active Directory",
+    "Group Policy",
+    "PowerShell"
+  ],
+  "importance": "This lab shows my proficiency with Active Directory, a core skill for any IT support role in enterprise environments.",
+  "videoUrl": "",
+  "order": 3
+}

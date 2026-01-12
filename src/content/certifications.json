@@ -1,0 +1,19 @@
+{
+  "certifications": [
+    {
+      "name": "CompTIA A+",
+      "status": "In Progress",
+      "description": "Actively studying for both Core 1 (220-1101) and Core 2 (220-1102) exams. My approach combines structured coursework with hands-on lab work—every concept I study gets reinforced through practical projects in my homelab environment.",
+      "details": "Core 1 & Core 2",
+      "url": "https://www.comptia.org/certifications/a",
+      "studyFocus": [
+        "Hardware Troubleshooting",
+        "Operating Systems",
+        "Networking",
+        "Security Fundamentals",
+        "Mobile Devices",
+        "Virtualization"
+      ]
+    }
+  ]
+}

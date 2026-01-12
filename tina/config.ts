@@ -228,6 +228,131 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "labs",
+        label: "Labs Section",
+        path: "src/content",
+        format: "json",
+        match: {
+          include: "labs",
+        },
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+          router: ({ document }) => {
+            return '/';
+          },
+        },
+        fields: [
+          {
+            type: "object",
+            name: "categories",
+            label: "Lab Categories",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Category Title",
+                required: true,
+              },
+              {
+                type: "object",
+                name: "labs",
+                label: "Labs",
+                list: true,
+                fields: [
+                  {
+                    type: "string",
+                    name: "title",
+                    label: "Lab Title",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "description",
+                    label: "Description",
+                    required: true,
+                  },
+                  {
+                    type: "string",
+                    name: "skills",
+                    label: "Skills",
+                    list: true,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: "certifications",
+        label: "Certifications Section",
+        path: "src/content",
+        format: "json",
+        match: {
+          include: "certifications",
+        },
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+          router: ({ document }) => {
+            return '/';
+          },
+        },
+        fields: [
+          {
+            type: "object",
+            name: "certifications",
+            label: "Certifications",
+            list: true,
+            fields: [
+              {
+                type: "string",
+                name: "name",
+                label: "Certification Name",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "status",
+                label: "Status",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "description",
+                label: "Description",
+                required: true,
+                ui: {
+                  component: "textarea",
+                },
+              },
+              {
+                type: "string",
+                name: "details",
+                label: "Details",
+              },
+              {
+                type: "string",
+                name: "url",
+                label: "Certificate URL",
+              },
+              {
+                type: "string",
+                name: "studyFocus",
+                label: "Study Focus Areas",
+                list: true,
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 });

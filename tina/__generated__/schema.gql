@@ -62,6 +62,10 @@ type Query {
   projectsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectsFilter): ProjectsConnection!
   contact(relativePath: String): Contact!
   contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
+  labs(relativePath: String): Labs!
+  labsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: LabsFilter): LabsConnection!
+  certifications(relativePath: String): Certifications!
+  certificationsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CertificationsFilter): CertificationsConnection!
 }
 
 input DocumentFilter {
@@ -69,6 +73,8 @@ input DocumentFilter {
   about: AboutFilter
   projects: ProjectsFilter
   contact: ContactFilter
+  labs: LabsFilter
+  certifications: CertificationsFilter
 }
 
 type DocumentConnectionEdges {
@@ -94,7 +100,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Hero | About | Projects | Contact | Folder
+union DocumentNode = Hero | About | Projects | Contact | Labs | Certifications | Folder
 
 type Hero implements Node & Document {
   statusBadge: String!
@@ -245,6 +251,90 @@ type ContactConnection implements Connection {
   edges: [ContactConnectionEdges]
 }
 
+type LabsCategoriesLabs {
+  title: String!
+  description: String!
+  skills: [String]
+}
+
+type LabsCategories {
+  title: String!
+  labs: [LabsCategoriesLabs]
+}
+
+type Labs implements Node & Document {
+  categories: [LabsCategories]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input LabsCategoriesLabsFilter {
+  title: StringFilter
+  description: StringFilter
+  skills: StringFilter
+}
+
+input LabsCategoriesFilter {
+  title: StringFilter
+  labs: LabsCategoriesLabsFilter
+}
+
+input LabsFilter {
+  categories: LabsCategoriesFilter
+}
+
+type LabsConnectionEdges {
+  cursor: String!
+  node: Labs
+}
+
+type LabsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [LabsConnectionEdges]
+}
+
+type CertificationsCertifications {
+  name: String!
+  status: String!
+  description: String!
+  details: String
+  url: String
+  studyFocus: [String]
+}
+
+type Certifications implements Node & Document {
+  certifications: [CertificationsCertifications]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CertificationsCertificationsFilter {
+  name: StringFilter
+  status: StringFilter
+  description: StringFilter
+  details: StringFilter
+  url: StringFilter
+  studyFocus: StringFilter
+}
+
+input CertificationsFilter {
+  certifications: CertificationsCertificationsFilter
+}
+
+type CertificationsConnectionEdges {
+  cursor: String!
+  node: Certifications
+}
+
+type CertificationsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CertificationsConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -259,6 +349,10 @@ type Mutation {
   createProjects(relativePath: String!, params: ProjectsMutation!): Projects!
   updateContact(relativePath: String!, params: ContactMutation!): Contact!
   createContact(relativePath: String!, params: ContactMutation!): Contact!
+  updateLabs(relativePath: String!, params: LabsMutation!): Labs!
+  createLabs(relativePath: String!, params: LabsMutation!): Labs!
+  updateCertifications(relativePath: String!, params: CertificationsMutation!): Certifications!
+  createCertifications(relativePath: String!, params: CertificationsMutation!): Certifications!
 }
 
 input DocumentUpdateMutation {
@@ -266,6 +360,8 @@ input DocumentUpdateMutation {
   about: AboutMutation
   projects: ProjectsMutation
   contact: ContactMutation
+  labs: LabsMutation
+  certifications: CertificationsMutation
   relativePath: String
 }
 
@@ -274,6 +370,8 @@ input DocumentMutation {
   about: AboutMutation
   projects: ProjectsMutation
   contact: ContactMutation
+  labs: LabsMutation
+  certifications: CertificationsMutation
 }
 
 input HeroMutation {
@@ -309,6 +407,34 @@ input ContactMutation {
   linkedin: String
   github: String
   twitter: String
+}
+
+input LabsCategoriesLabsMutation {
+  title: String
+  description: String
+  skills: [String]
+}
+
+input LabsCategoriesMutation {
+  title: String
+  labs: [LabsCategoriesLabsMutation]
+}
+
+input LabsMutation {
+  categories: [LabsCategoriesMutation]
+}
+
+input CertificationsCertificationsMutation {
+  name: String
+  status: String
+  description: String
+  details: String
+  url: String
+  studyFocus: [String]
+}
+
+input CertificationsMutation {
+  certifications: [CertificationsCertificationsMutation]
 }
 
 schema {

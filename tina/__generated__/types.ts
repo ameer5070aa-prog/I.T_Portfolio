@@ -90,6 +90,10 @@ export type Query = {
   projectsConnection: ProjectsConnection;
   contact: Contact;
   contactConnection: ContactConnection;
+  labs: Labs;
+  labsConnection: LabsConnection;
+  certifications: Certifications;
+  certificationsConnection: CertificationsConnection;
 };
 
 
@@ -173,11 +177,43 @@ export type QueryContactConnectionArgs = {
   filter?: InputMaybe<ContactFilter>;
 };
 
+
+export type QueryLabsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryLabsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<LabsFilter>;
+};
+
+
+export type QueryCertificationsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCertificationsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CertificationsFilter>;
+};
+
 export type DocumentFilter = {
   hero?: InputMaybe<HeroFilter>;
   about?: InputMaybe<AboutFilter>;
   projects?: InputMaybe<ProjectsFilter>;
   contact?: InputMaybe<ContactFilter>;
+  labs?: InputMaybe<LabsFilter>;
+  certifications?: InputMaybe<CertificationsFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -217,7 +253,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Hero | About | Projects | Contact | Folder;
+export type DocumentNode = Hero | About | Projects | Contact | Labs | Certifications | Folder;
 
 export type Hero = Node & Document & {
   __typename?: 'Hero';
@@ -381,6 +417,99 @@ export type ContactConnection = Connection & {
   edges?: Maybe<Array<Maybe<ContactConnectionEdges>>>;
 };
 
+export type LabsCategoriesLabs = {
+  __typename?: 'LabsCategoriesLabs';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  skills?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type LabsCategories = {
+  __typename?: 'LabsCategories';
+  title: Scalars['String']['output'];
+  labs?: Maybe<Array<Maybe<LabsCategoriesLabs>>>;
+};
+
+export type Labs = Node & Document & {
+  __typename?: 'Labs';
+  categories?: Maybe<Array<Maybe<LabsCategories>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type LabsCategoriesLabsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  skills?: InputMaybe<StringFilter>;
+};
+
+export type LabsCategoriesFilter = {
+  title?: InputMaybe<StringFilter>;
+  labs?: InputMaybe<LabsCategoriesLabsFilter>;
+};
+
+export type LabsFilter = {
+  categories?: InputMaybe<LabsCategoriesFilter>;
+};
+
+export type LabsConnectionEdges = {
+  __typename?: 'LabsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Labs>;
+};
+
+export type LabsConnection = Connection & {
+  __typename?: 'LabsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<LabsConnectionEdges>>>;
+};
+
+export type CertificationsCertifications = {
+  __typename?: 'CertificationsCertifications';
+  name: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  details?: Maybe<Scalars['String']['output']>;
+  url?: Maybe<Scalars['String']['output']>;
+  studyFocus?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type Certifications = Node & Document & {
+  __typename?: 'Certifications';
+  certifications?: Maybe<Array<Maybe<CertificationsCertifications>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CertificationsCertificationsFilter = {
+  name?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  details?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+  studyFocus?: InputMaybe<StringFilter>;
+};
+
+export type CertificationsFilter = {
+  certifications?: InputMaybe<CertificationsCertificationsFilter>;
+};
+
+export type CertificationsConnectionEdges = {
+  __typename?: 'CertificationsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Certifications>;
+};
+
+export type CertificationsConnection = Connection & {
+  __typename?: 'CertificationsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CertificationsConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -396,6 +525,10 @@ export type Mutation = {
   createProjects: Projects;
   updateContact: Contact;
   createContact: Contact;
+  updateLabs: Labs;
+  createLabs: Labs;
+  updateCertifications: Certifications;
+  createCertifications: Certifications;
 };
 
 
@@ -479,11 +612,37 @@ export type MutationCreateContactArgs = {
   params: ContactMutation;
 };
 
+
+export type MutationUpdateLabsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: LabsMutation;
+};
+
+
+export type MutationCreateLabsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: LabsMutation;
+};
+
+
+export type MutationUpdateCertificationsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CertificationsMutation;
+};
+
+
+export type MutationCreateCertificationsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CertificationsMutation;
+};
+
 export type DocumentUpdateMutation = {
   hero?: InputMaybe<HeroMutation>;
   about?: InputMaybe<AboutMutation>;
   projects?: InputMaybe<ProjectsMutation>;
   contact?: InputMaybe<ContactMutation>;
+  labs?: InputMaybe<LabsMutation>;
+  certifications?: InputMaybe<CertificationsMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -492,6 +651,8 @@ export type DocumentMutation = {
   about?: InputMaybe<AboutMutation>;
   projects?: InputMaybe<ProjectsMutation>;
   contact?: InputMaybe<ContactMutation>;
+  labs?: InputMaybe<LabsMutation>;
+  certifications?: InputMaybe<CertificationsMutation>;
 };
 
 export type HeroMutation = {
@@ -529,6 +690,34 @@ export type ContactMutation = {
   twitter?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type LabsCategoriesLabsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  skills?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type LabsCategoriesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  labs?: InputMaybe<Array<InputMaybe<LabsCategoriesLabsMutation>>>;
+};
+
+export type LabsMutation = {
+  categories?: InputMaybe<Array<InputMaybe<LabsCategoriesMutation>>>;
+};
+
+export type CertificationsCertificationsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  details?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+  studyFocus?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type CertificationsMutation = {
+  certifications?: InputMaybe<Array<InputMaybe<CertificationsCertificationsMutation>>>;
+};
+
 export type HeroPartsFragment = { __typename: 'Hero', statusBadge: string, headline: string, description: string, skills: Array<string> };
 
 export type AboutPartsFragment = { __typename: 'About', title: string, bio: any, stats?: Array<{ __typename: 'AboutStats', label?: string | null, value?: string | null } | null> | null };
@@ -536,6 +725,10 @@ export type AboutPartsFragment = { __typename: 'About', title: string, bio: any,
 export type ProjectsPartsFragment = { __typename: 'Projects', title: string, summary: string, covers: Array<string>, skills: Array<string>, importance?: string | null, videoUrl?: string | null, order?: number | null };
 
 export type ContactPartsFragment = { __typename: 'Contact', email: string, linkedin?: string | null, github?: string | null, twitter?: string | null };
+
+export type LabsPartsFragment = { __typename: 'Labs', categories?: Array<{ __typename: 'LabsCategories', title: string, labs?: Array<{ __typename: 'LabsCategoriesLabs', title: string, description: string, skills?: Array<string | null> | null } | null> | null } | null> | null };
+
+export type CertificationsPartsFragment = { __typename: 'Certifications', certifications?: Array<{ __typename: 'CertificationsCertifications', name: string, status: string, description: string, details?: string | null, url?: string | null, studyFocus?: Array<string | null> | null } | null> | null };
 
 export type HeroQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -613,6 +806,44 @@ export type ContactConnectionQueryVariables = Exact<{
 
 export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, email: string, linkedin?: string | null, github?: string | null, twitter?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type LabsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type LabsQuery = { __typename?: 'Query', labs: { __typename: 'Labs', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'LabsCategories', title: string, labs?: Array<{ __typename: 'LabsCategoriesLabs', title: string, description: string, skills?: Array<string | null> | null } | null> | null } | null> | null } };
+
+export type LabsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<LabsFilter>;
+}>;
+
+
+export type LabsConnectionQuery = { __typename?: 'Query', labsConnection: { __typename?: 'LabsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'LabsConnectionEdges', cursor: string, node?: { __typename: 'Labs', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, categories?: Array<{ __typename: 'LabsCategories', title: string, labs?: Array<{ __typename: 'LabsCategoriesLabs', title: string, description: string, skills?: Array<string | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+
+export type CertificationsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type CertificationsQuery = { __typename?: 'Query', certifications: { __typename: 'Certifications', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, certifications?: Array<{ __typename: 'CertificationsCertifications', name: string, status: string, description: string, details?: string | null, url?: string | null, studyFocus?: Array<string | null> | null } | null> | null } };
+
+export type CertificationsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CertificationsFilter>;
+}>;
+
+
+export type CertificationsConnectionQuery = { __typename?: 'Query', certificationsConnection: { __typename?: 'CertificationsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CertificationsConnectionEdges', cursor: string, node?: { __typename: 'Certifications', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, certifications?: Array<{ __typename: 'CertificationsCertifications', name: string, status: string, description: string, details?: string | null, url?: string | null, studyFocus?: Array<string | null> | null } | null> | null } | null } | null> | null } };
+
 export const HeroPartsFragmentDoc = gql`
     fragment HeroParts on Hero {
   __typename
@@ -653,6 +884,35 @@ export const ContactPartsFragmentDoc = gql`
   linkedin
   github
   twitter
+}
+    `;
+export const LabsPartsFragmentDoc = gql`
+    fragment LabsParts on Labs {
+  __typename
+  categories {
+    __typename
+    title
+    labs {
+      __typename
+      title
+      description
+      skills
+    }
+  }
+}
+    `;
+export const CertificationsPartsFragmentDoc = gql`
+    fragment CertificationsParts on Certifications {
+  __typename
+  certifications {
+    __typename
+    name
+    status
+    description
+    details
+    url
+    studyFocus
+  }
 }
     `;
 export const HeroDocument = gql`
@@ -883,6 +1143,120 @@ export const ContactConnectionDocument = gql`
   }
 }
     ${ContactPartsFragmentDoc}`;
+export const LabsDocument = gql`
+    query labs($relativePath: String!) {
+  labs(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...LabsParts
+  }
+}
+    ${LabsPartsFragmentDoc}`;
+export const LabsConnectionDocument = gql`
+    query labsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: LabsFilter) {
+  labsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...LabsParts
+      }
+    }
+  }
+}
+    ${LabsPartsFragmentDoc}`;
+export const CertificationsDocument = gql`
+    query certifications($relativePath: String!) {
+  certifications(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CertificationsParts
+  }
+}
+    ${CertificationsPartsFragmentDoc}`;
+export const CertificationsConnectionDocument = gql`
+    query certificationsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CertificationsFilter) {
+  certificationsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CertificationsParts
+      }
+    }
+  }
+}
+    ${CertificationsPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -909,6 +1283,18 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     contactConnection(variables?: ContactConnectionQueryVariables, options?: C): Promise<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}> {
         return requester<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}, ContactConnectionQueryVariables>(ContactConnectionDocument, variables, options);
+      },
+    labs(variables: LabsQueryVariables, options?: C): Promise<{data: LabsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LabsQueryVariables, query: string}> {
+        return requester<{data: LabsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LabsQueryVariables, query: string}, LabsQueryVariables>(LabsDocument, variables, options);
+      },
+    labsConnection(variables?: LabsConnectionQueryVariables, options?: C): Promise<{data: LabsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LabsConnectionQueryVariables, query: string}> {
+        return requester<{data: LabsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LabsConnectionQueryVariables, query: string}, LabsConnectionQueryVariables>(LabsConnectionDocument, variables, options);
+      },
+    certifications(variables: CertificationsQueryVariables, options?: C): Promise<{data: CertificationsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CertificationsQueryVariables, query: string}> {
+        return requester<{data: CertificationsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CertificationsQueryVariables, query: string}, CertificationsQueryVariables>(CertificationsDocument, variables, options);
+      },
+    certificationsConnection(variables?: CertificationsConnectionQueryVariables, options?: C): Promise<{data: CertificationsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CertificationsConnectionQueryVariables, query: string}> {
+        return requester<{data: CertificationsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CertificationsConnectionQueryVariables, query: string}, CertificationsConnectionQueryVariables>(CertificationsConnectionDocument, variables, options);
       }
     };
   }

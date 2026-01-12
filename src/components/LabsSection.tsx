@@ -1,7 +1,73 @@
 import LabCard from './LabCard';
 import TerminalText from './TerminalText';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import labsData from '../content/labs.json';
 
-const labCategories = [
+const LabsSection = () => {
+  // Load labs with TinaCMS support
+  const { data } = useTina({
+    query: `query Labs($relativePath: String!) {
+      labs(relativePath: $relativePath) {
+        categories {
+          title
+          labs {
+            title
+            description
+            skills
+          }
+        }
+      }
+    }`,
+    variables: { relativePath: 'labs.json' },
+    data: { labs: labsData },
+  });
+
+  const categories = data?.labs?.categories || [];
+
+  return (
+    <section id="labs" className="py-24 relative">
+      <div className="section-container">
+        {/* Section header */}
+        <div className="mb-12">
+          <TerminalText command="./run-labs.sh" output="Initializing lab environment..." />
+          <h2 className="text-3xl sm:text-4xl font-semibold mt-2 mb-4">
+            Labs & Exercises
+          </h2>
+          <p className="text-muted-foreground max-w-2xl">
+            Smaller, focused exercises that build specific skills. Each lab targets 
+            a practical scenario you'd encounter in daily IT support work.
+          </p>
+        </div>
+
+        {/* Lab categories */}
+        <div className="space-y-10" data-tina-field={tinaField(data.labs, 'categories')}>
+          {categories.map((category: any, catIndex: number) => (
+            <div key={catIndex} data-tina-field={tinaField(category, 'title')}>
+              <h3 className="text-sm font-mono text-secondary mb-4 uppercase tracking-wider">
+                {category.title}
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-4" data-tina-field={tinaField(category, 'labs')}>
+                {category.labs?.map((lab: any, labIndex: number) => (
+                  <LabCard 
+                    key={labIndex} 
+                    title={lab.title}
+                    description={lab.description}
+                    tools={lab.skills}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default LabsSection;
+
+// OLD HARDCODED DATA - Can be removed
+const oldLabCategories = [
   {
     category: 'Ticketing & Service Desk Labs',
     labs: [
@@ -78,41 +144,3 @@ const labCategories = [
     ],
   },
 ];
-
-const LabsSection = () => {
-  return (
-    <section id="labs" className="py-24 relative">
-      <div className="section-container">
-        {/* Section header */}
-        <div className="mb-12">
-          <TerminalText command="./run-labs.sh" output="Initializing lab environment..." />
-          <h2 className="text-3xl sm:text-4xl font-semibold mt-2 mb-4">
-            Labs & Exercises
-          </h2>
-          <p className="text-muted-foreground max-w-2xl">
-            Smaller, focused exercises that build specific skills. Each lab targets 
-            a practical scenario you'd encounter in daily IT support work.
-          </p>
-        </div>
-
-        {/* Lab categories */}
-        <div className="space-y-10">
-          {labCategories.map((category, catIndex) => (
-            <div key={catIndex}>
-              <h3 className="text-sm font-mono text-secondary mb-4 uppercase tracking-wider">
-                {category.category}
-              </h3>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {category.labs.map((lab, labIndex) => (
-                  <LabCard key={labIndex} {...lab} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-export default LabsSection;

@@ -1,0 +1,79 @@
+{
+  "categories": [
+    {
+      "title": "Ticketing & Service Desk Labs",
+      "labs": [
+        {
+          "title": "Ticket Triage Exercise",
+          "description": "Practice categorizing and prioritizing incoming tickets based on urgency, impact, and user context.",
+          "skills": ["Ticket Categories", "Priority Matrix", "SLA Rules"]
+        },
+        {
+          "title": "Knowledge Base Article Creation",
+          "description": "Transform resolved tickets into searchable KB articles with proper formatting and keywords.",
+          "skills": ["Documentation", "KB Systems", "Search Optimization"]
+        }
+      ]
+    },
+    {
+      "title": "Operating System Labs",
+      "labs": [
+        {
+          "title": "Windows Safe Mode Recovery",
+          "description": "Boot into various safe mode options and perform system recovery operations.",
+          "skills": ["Windows Recovery", "msconfig", "System Restore"]
+        },
+        {
+          "title": "User Profile Migration",
+          "description": "Migrate user data and settings between profiles or machines using built-in tools.",
+          "skills": ["USMT", "Profile Copy", "Data Backup"]
+        }
+      ]
+    },
+    {
+      "title": "Networking Labs",
+      "labs": [
+        {
+          "title": "IP Configuration Diagnostics",
+          "description": "Use command-line tools to diagnose and fix common IP configuration issues.",
+          "skills": ["ipconfig", "netstat", "arp"]
+        },
+        {
+          "title": "DNS Troubleshooting",
+          "description": "Identify and resolve DNS resolution failures using systematic testing.",
+          "skills": ["nslookup", "DNS Cache", "Hosts File"]
+        }
+      ]
+    },
+    {
+      "title": "Automation & Scripting Labs",
+      "labs": [
+        {
+          "title": "Batch File Basics",
+          "description": "Create simple batch scripts for repetitive help desk tasks like clearing caches or mapping drives.",
+          "skills": ["CMD", "Batch Scripts", "Task Automation"]
+        },
+        {
+          "title": "PowerShell One-Liners",
+          "description": "Learn essential PowerShell commands for AD queries and system information gathering.",
+          "skills": ["PowerShell", "Get-ADUser", "Get-WmiObject"]
+        }
+      ]
+    },
+    {
+      "title": "Security & Permissions Labs",
+      "labs": [
+        {
+          "title": "NTFS Permissions Audit",
+          "description": "Review and document file/folder permissions to identify access issues.",
+          "skills": ["icacls", "Security Tab", "Effective Access"]
+        },
+        {
+          "title": "Account Lockout Investigation",
+          "description": "Trace the source of account lockouts using event logs and lockout tools.",
+          "skills": ["Event Viewer", "LockoutStatus", "Account Policies"]
+        }
+      ]
+    }
+  ]
+}

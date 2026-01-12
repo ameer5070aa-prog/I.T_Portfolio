@@ -1,0 +1,19 @@
+{
+  "title": "Majlis AI – Multi-Agent System",
+  "summary": "Multi-agent AI system with coordinated workflows, focusing on orchestration and reliability.",
+  "covers": [
+    "Multi-agent role design and coordination",
+    "Session handling and state persistence",
+    "API integrations and message flow debugging",
+    "Logging, verification, and reliability tuning"
+  ],
+  "skills": [
+    "Systems Design",
+    "Automation",
+    "API Integration",
+    "Debugging"
+  ],
+  "importance": "This advanced project demonstrates my understanding of complex system architectures and automation workflows.",
+  "videoUrl": "",
+  "order": 6
+}

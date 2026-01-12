@@ -1,0 +1,18 @@
+{
+  "title": "Help Desk Ticketing System Simulation",
+  "summary": "A modeled support ticketing system focused on how issues are reported, prioritized, escalated, and resolved.",
+  "covers": [
+    "Ticket creation, categorization, and prioritization",
+    "Escalation tiers and routing logic",
+    "SLA tracking and resolution timing",
+    "Knowledge base articles from resolved tickets"
+  ],
+  "skills": [
+    "Ticketing Systems",
+    "ITIL Fundamentals",
+    "SLA Management"
+  ],
+  "importance": "This project demonstrates my understanding of IT service management workflows and how to handle support requests systematically.",
+  "videoUrl": "",
+  "order": 2
+}
